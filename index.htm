@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshCart</title>
+    <link href="src/output.css" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="flex justify-center gap-5 lg:gap-0 lg:justify-around items-center bg-white h-[80px] px-2 lg:px-0 w-full fixed top-0">
+            <img src="freshcart-logo.svg" alt="freshcart-logo"/>
+          
+            <p onclick="opensebet()" class="relative">
+                <i class="fa-solid fa-bag-shopping text-[#3d4f58] text-3xl"></i>
+                <span id="countproducts" class="absolute top-0 right-0 bg-[#0aad0a]  text-white rounded-[50%] w-[18px] h-[18px] text-[.8em] flex justify-center items-center p-1">0</span>
+            </p>
+        </div>
+    </header>
+    <main class="pt-[80px]">
+         <div class="flex flex-col justify-center items-center">
+             <input id="search" class="border w-full  max-w-[350px] h-[40px] pl-2 mb-[10px]" type="search" placeholder="Search for products">
+              <div id="blocks" style="display: none;" class="relative w-full flex justify-center">
+            <div id="srchcontainer" class="absolute bg-[#0aad0a] top-[-5px] z-50 w-[95vw] max-w-[400px] p-4 left-1/2 -translate-x-1/2">
+                <div class="grid grid-cols-2 sm:grid-cols-3 items-start sm:gap-4 gap-6">
+
+
+
+                </div>
+            </div>
+
+        </div>
+           </div>
+         <!--Category-->
+        <ul id="categorycontainer" class="flex justify-center items-center flex-wrap gap-7 mt-10 mb-10">
+             <li onclick="filterproducts('all')" class="bg-[#0aad0a] text-white rounded-[10px] py-1 px-3 hover:bg-[#0d7e0f] duration-300 ease-in-out">All</li>
+        </ul>
+
+        <div class="mb-[30px]"><p class="font-[500] text-3xl text-[#21313c] pl-[70px] mt-5">Popular Products</p></div>
+    
+        <!--Cards-->
+        <div id="cardcontainer" class="flex justify-center items-center gap-5 flex-wrap">
+        </div>
+
+        <!--Sebet-->
+        
+            <div id="modal" class="hidden">
+                <div
+                    class="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto">
+                    <div class="w-full max-w-lg bg-white shadow-lg rounded-3xl px-8 py-6 relative">
+                        
+                            <div class="flex justify-between px-2">
+                                <h3 class="text-slate-900 text-[22px] font-semibold">Members</h3>
+                                <p onclick="closesebet()"><i class="fa-solid fa-xmark"></i></p>
+                            </div>
+
+                          
+                       
+
+                        <div id="inmodal"></div>
+                        <div id="totalpay" class="flex justify-end text-red-800"></div>
+                    </div>
+                </div>
+            </div>
+
+           
+     
+    </main>
+   <footer class="bg-[#f0f3f2] pt-16 pb-8 px-4 lg:px-20 font-sans text-[#5c6c75] mt-17">
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 mb-12">
+        
+        <div>
+            <h6 class="font-bold text-[#21313c] mb-4">Categories</h6>
+            <ul class="space-y-2 text-sm">
+                <li class="cursor-default">Vegetables & Fruits</li>
+                <li class="cursor-default">Breakfast & instant food</li>
+                <li class="cursor-default">Bakery & Biscuits</li>
+                <li class="cursor-default">Atta, rice & dal</li>
+                <li class="cursor-default">Sauces & spreads</li>
+                <li class="cursor-default">Organic & gourmet</li>
+                <li class="cursor-default">Baby care</li>
+                <li class="cursor-default">Cleaning essentials</li>
+                <li class="cursor-default">Personal care</li>
+            </ul>
+        </div>
+
+        <div class="pt-10">
+            <ul class="space-y-2 text-sm">
+                <li class="cursor-default">Dairy, bread & eggs</li>
+                <li class="cursor-default">Cold drinks & juices</li>
+                <li class="cursor-default">Tea, coffee & drinks</li>
+                <li class="cursor-default">Masala, oil & more</li>
+                <li class="cursor-default">Chicken, meat & fish</li>
+                <li class="cursor-default">Paan corner</li>
+                <li class="cursor-default">Pharma & wellness</li>
+                <li class="cursor-default">Home & office</li>
+                <li class="cursor-default">Pet care</li>
+            </ul>
+        </div>
+
+        <div>
+            <h6 class="font-bold text-[#21313c] mb-4">Get to know us</h6>
+            <ul class="space-y-2 text-sm">
+                <li class="cursor-default">Company</li>
+                <li class="cursor-default">About</li>
+                <li class="cursor-default">Blog</li>
+                <li class="cursor-default">Help Center</li>
+                <li class="cursor-default">Our Value</li>
+            </ul>
+        </div>
+
+        <div>
+            <h6 class="font-bold text-[#21313c] mb-4">For Consumers</h6>
+            <ul class="space-y-2 text-sm">
+                <li class="cursor-default">Payments</li>
+                <li class="cursor-default">Shipping</li>
+                <li class="cursor-default">Product Returns</li>
+                <li class="cursor-default">FAQ</li>
+                <li class="cursor-default">Shop Checkout</li>
+            </ul>
+        </div>
+
+        <div>
+            <h6 class="font-bold text-[#21313c] mb-4">Become a Shopper</h6>
+            <ul class="space-y-2 text-sm">
+                <li class="cursor-default">Shopper Opportunities</li>
+                <li class="cursor-default">Become a Shopper</li>
+                <li class="cursor-default">Earnings</li>
+                <li class="cursor-default">Ideas & Guides</li>
+                <li class="cursor-default">New Retailers</li>
+            </ul>
+        </div>
+
+        <div>
+            <h6 class="font-bold text-[#21313c] mb-4">Freshcart programs</h6>
+            <ul class="space-y-2 text-sm">
+                <li class="cursor-default">Freshcart programs</li>
+                <li class="cursor-default">Gift Cards</li>
+                <li class="cursor-default">Promos & Coupons</li>
+                <li class="cursor-default">Freshcart Ads</li>
+                <li class="cursor-default">Careers</li>
+            </ul>
+        </div>
+    </div>
+
+    <hr class="border-gray-300 mb-8">
+
+    <div class="flex flex-col md:flex-row justify-between items-center text-sm gap-4">
+        <p>© 2026 FreshCart TailwindCSS eCommerce HTML Template. Powered by <span class="text-[#0aad0a]">Codescandy</span> ~ Distributed by <span class="text-[#0aad0a]">ThemeWagon</span>.</p>
+        
+        <div class="flex items-center gap-3">
+            <span class="mr-2">Follow us on</span>
+            <div class="border border-gray-300 p-2 rounded-lg hover:bg-[#0aad0a] hover:text-white transition-colors cursor-pointer">
+                <i class="fab fa-facebook-f w-4 text-center"></i>
+            </div>
+            <div class="border border-gray-300 p-2 rounded-lg hover:bg-[#0aad0a] hover:text-white transition-colors cursor-pointer">
+                <i class="fab fa-x-twitter w-4 text-center"></i>
+            </div>
+            <div class="border border-gray-300 p-2 rounded-lg hover:bg-[#0aad0a] hover:text-white transition-colors cursor-pointer">
+                <i class="fab fa-instagram w-4 text-center"></i>
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="app.js"></script>
+</body>
+</html>
