@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail</title>
+    <link href="src/output.css" rel="stylesheet">
+</head>
+<body class="flex justify-center items-center h-[100vh]">
+    <div id="detailcontainer">
+       
+    </div>
+
+    <script>
+        let detailcontainer = document.getElementById('detailcontainer')
+        const ProductsUrl = "https://69c9613068edf52c954e7935.mockapi.io/ProDucts"
+
+        function productdetail(){
+              const urlParams = new URLSearchParams(window.location.search)
+                const itemParam = urlParams.get('item')
+                const id = itemParam.split('-')[0]
+
+                fetch(`${ProductsUrl}/${id}`)
+                    .then(res => res.json())
+                    .then(p => {
+                        detailcontainer.innerHTML = `
+                        <div class="bg-[#0aad0a] rounded-tr-[40px] rounded-bl-[40px]">
+                                <img class=" p-10  w-[380px]" src="${p.image}" alt="">
+                                <div class="pl-5 pb-6 text-white font-[500] uppercase" >
+                                    <p>${p.category}</p>
+                                    <p>${p.title}</p>
+                                    <p>${p.price}</p>
+                                    <p>${p.rating}</p>
+                                </div>
+                       </div>
+                        `
+                    })
+        }
+        productdetail()
+    </script>
+</body>
+</html>

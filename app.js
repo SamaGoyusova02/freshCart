@@ -2,6 +2,7 @@ let cardcontainer = document.getElementById('cardcontainer')
 let modal = document.getElementById('modal')
 let allproducts = []
 let sebet = []
+const ProductsUrl = "https://69c9613068edf52c954e7935.mockapi.io/ProDucts"
 fetch('https://69c9613068edf52c954e7935.mockapi.io/ProDucts')
 .then(res => res.json())
 .then(data => {
@@ -106,8 +107,28 @@ fetch('https://69c9613068edf52c954e7935.mockapi.io/ProductsCategory')
     })
 })
 
+function createslug(title){
+    return title
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '') 
+    .replace(/[\s_-]+/g, '-') 
+    .replace(/^-+|-+$/g, ''); 
+}
+function FetcData(){
+    fetch('https://69c9613068edf52c954e7935.mockapi.io/ProDucts')
+    .then(prd => prd.json())
+    .then(prddata => {
+    allproducts = prddata
+    renderdata(prddata)
+    })
+}
+FetcData()
+
 function renderdata(data){
-    cardcontainer.innerHTML = data.map(item => `
+    cardcontainer.innerHTML = data.map(item => { 
+        const slug = createslug(item.title);
+        return `
         <div class="border border-[#889397] w-full max-w-[260px] px-[10px] pb-[30px] pt-[10px] rounded-[10px] hover:border-[#0aad0a]  hover:shadow-[0_0_15px_#dfe2e1] duration-300 ease-in-out">
                 <img  src="${item.image}" alt=""/>
                 <div>
@@ -117,10 +138,12 @@ function renderdata(data){
                     <div class="flex justify-between pt-2">
                         <p class="text-[#323232] font-[700]">${item.price}</p>
                         <button onclick="addbasket(${item.id})" class="bg-[#0aad0a] text-white px-2 rounded-[10px] py-0.5 flex justify-center items-center">+ Add</button>
-                    </div>
+                   
+                        </div>
+                                             <a href="detail.htm?item=${item.id}-${slug}" class="mt-3 block text-center text-white bg-[#0aad0a]  p-2 rounded text-sm transition"> Ətraflı</a>
                 </div>
             </div>
-    `).join('')
+    `}).join('')
 }
 
 function filterproducts(name){
@@ -151,7 +174,7 @@ function searchdata(keyword){
     )
 
     serachdatas(sf)
-    renderdata(sf)
+   
 }
 function serachdatas(data) {
 
