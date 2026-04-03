@@ -118,7 +118,7 @@ function createslug(title){
 function FetcData(){
     fetch('https://69c9613068edf52c954e7935.mockapi.io/ProDucts')
     .then(prd => prd.json())
-    .then(prddata => {
+    .then(prddata => {      
     allproducts = prddata
     renderdata(prddata)
     })
